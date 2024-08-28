@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather in {{ city }}</title>
+</head>
+<body>
+    <h1>Weather in {{ city }}</h1>
+    <h2>Current Weather</h2>
+    <p>{{ weather_data['weather'][0]['description'].title() }}</p>
+    <p>Temperature: {{ weather_data['main']['temp'] }}°C</p>
+    <p>Humidity: {{ weather_data['main']['humidity'] }}%</p>
+    <p>Wind Speed: {{ weather_data['wind']['speed'] }} m/s</p>
+    <img src="http://openweathermap.org/img/wn/{{ weather_data['weather'][0]['icon'] }}@2x.png" alt="Weather Icon">
+
+    <h2>5-Day Forecast</h2>
+    <ul>
+        {% for date, data in forecast_data.items() %}
+        <li>
+            <p>Date: {{ date }}</p>
+            <p>High: {{ data['high'] }}°C, Low: {{ data['low'] }}°C</p>
+            <img src="http://openweathermap.org/img/wn/{{ data['icon'] }}@2x.png" alt="Weather Icon">
+            <p>{{ data['description'].title() }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">Back</a> | <a href="/info">Info</a>
+</body>
+</html>
